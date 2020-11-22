@@ -164,7 +164,11 @@ footer {
   flex: 1;
 }
 .right {
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
+}
+.right > button {
+  height: 40px;
 }
 .total {
   display: flex;
@@ -175,6 +179,7 @@ footer {
 .total > div {
   font-size: 2rem;
 }
+
 .total > div,
 .total > button {
   flex: 1;
