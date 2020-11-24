@@ -4,6 +4,7 @@ import { Fade, Zoom } from "react-reveal";
 import Modal from "react-modal";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/actions/productActions";
+import { addToCart } from "../store/actions/cartActions";
 
 class Products extends Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class Products extends Component {
                         onClick={() => this.props.addToCart(product)}
                         className="button primary"
                       >
-                        Add to cart
+                        Add to car
                       </button>
                     </div>
                   </div>
@@ -105,8 +106,11 @@ class Products extends Component {
 }
 
 export default connect(
-  (state) => ({ products: state.products.filteredItems }),
+  (state) => ({
+    products: state.products.filteredItems,
+  }),
   {
     fetchProducts,
+    addToCart,
   }
 )(Products);
