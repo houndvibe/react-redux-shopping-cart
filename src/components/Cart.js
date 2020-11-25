@@ -1,8 +1,24 @@
 import React, { useState } from "react";
-import formatCurrency from "../util";
 import Fade from "react-reveal/Fade";
 import { connect } from "react-redux";
+import { Zoom } from "react-reveal";
+import Modal from "react-modal";
+import formatCurrency from "../util";
 import { removeFromCart } from "../store/actions/cartActions";
+import CartItem from "./CartItem";
+import CheckoutForm from "./CheckoutForm";
+import OrderModal from "./OrderModal";
+
+const modalStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    minWidth: "700px",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
 const Cart = ({ removeFromCart, cartItems }) => {
   const [state, setState] = useState({
@@ -11,6 +27,11 @@ const Cart = ({ removeFromCart, cartItems }) => {
     address: "",
     showCheckout: false,
   });
+
+  const [orderList, setOrderList] = useState();
+  const closeModal = () => {
+    setOrderList();
+  };
 
   const handleInput = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -21,10 +42,10 @@ const Cart = ({ removeFromCart, cartItems }) => {
     const order = {
       name: state.name,
       email: state.email,
-      addres: state.addres,
+      address: state.address,
       cartItems: cartItems,
     };
-    alert(JSON.stringify(order));
+    setOrderList(order);
   };
 
   const cartItemsCount = cartItems
@@ -49,32 +70,11 @@ const Cart = ({ removeFromCart, cartItems }) => {
           <Fade left cascade>
             <ul className="cart-items">
               {cartItems.map((item) => (
-                <li key={item._id}>
-                  <div>
-                    <img src={item.image} alt={item.title}></img>
-                  </div>
-                  <div>
-                    <div>{item.title}</div>
-                    <div className="right">
-                      <div>
-                        {" "}
-                        {formatCurrency(item.price)} x {item.count}{" "}
-                        {item.count > 1 &&
-                          " " +
-                            "(" +
-                            formatCurrency(item.count * item.price) +
-                            ")"}{" "}
-                      </div>
-
-                      <button
-                        className="button"
-                        onClick={() => removeFromCart(item)}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  </div>
-                </li>
+                <CartItem
+                  key={item._id}
+                  removeFromCart={removeFromCart}
+                  item={item}
+                />
               ))}
             </ul>
           </Fade>
@@ -102,43 +102,24 @@ const Cart = ({ removeFromCart, cartItems }) => {
             {state.showCheckout && (
               <Fade right cascade>
                 <div className="cart">
-                  <form onSubmit={(e) => createOrder(e)}>
-                    <ul className="form-container">
-                      <li>
-                        <label>Email</label>
-                        <input
-                          name="email"
-                          type="email"
-                          required
-                          onChange={(e) => handleInput(e)}
-                        ></input>
-                      </li>
-                      <li>
-                        <label>Name</label>
-                        <input
-                          name="name"
-                          type="text"
-                          required
-                          onChange={(e) => handleInput(e)}
-                        ></input>
-                      </li>
-                      <li>
-                        <label>Address</label>
-                        <input
-                          name="address"
-                          type="text"
-                          required
-                          onChange={(e) => handleInput(e)}
-                        ></input>
-                      </li>
-                      <li>
-                        <button className="button primary" type="submit">
-                          Checkout
-                        </button>
-                      </li>
-                    </ul>
-                  </form>
+                  <CheckoutForm
+                    handleInput={handleInput}
+                    createOrder={createOrder}
+                  />
                 </div>
+              </Fade>
+            )}
+            {orderList && (
+              <Fade right cascade>
+                <Modal
+                  style={modalStyles}
+                  isOpen={true}
+                  onRequestClose={closeModal}
+                >
+                  <Zoom>
+                    <OrderModal closeModal={closeModal} orderList={orderList} />
+                  </Zoom>
+                </Modal>
               </Fade>
             )}
           </div>
