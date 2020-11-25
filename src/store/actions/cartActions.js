@@ -10,7 +10,6 @@ export const addToCart = (product) => (dispatch, getState) => {
       x.count++;
     }
   });
-
   if (!alreadyExists) {
     cartItems.push({ ...product, count: 1 });
   }
@@ -24,9 +23,11 @@ export const addToCart = (product) => (dispatch, getState) => {
 };
 
 export const removeFromCart = (product) => (dispatch, getState) => {
-  const cartItems = getState()
-    .cart.cartItems.slice()
-    .filter((x) => x._id !== product._id);
+  const cartItems = [...getState().cart.cartItems].filter(
+    (x) => x._id !== product._id
+  );
+
   dispatch({ type: REMOVE_FROM_CART, payload: { cartItems } });
+
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 };
