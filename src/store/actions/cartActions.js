@@ -1,21 +1,25 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../types";
 
 export const addToCart = (product) => (dispatch, getState) => {
-  const cartItems = getState().cart.cartItems.slice();
+  const cartItems = [...getState().cart.cartItems];
   let alreadyExists = false;
+
   cartItems.forEach((x) => {
     if (x._id === product._id) {
       alreadyExists = true;
       x.count++;
     }
   });
+
   if (!alreadyExists) {
     cartItems.push({ ...product, count: 1 });
   }
+
   dispatch({
     type: ADD_TO_CART,
     payload: { cartItems },
   });
+
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 };
 

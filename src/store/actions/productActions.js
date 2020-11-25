@@ -4,18 +4,16 @@ import {
   ORDER_PRODUCTS_BY_PRICE,
 } from "../types";
 
-export const fetchProducts = () => async (dispatch) => {
-  const res = await fetch("/api/products");
-  const data = await res.json();
-  console.log(data);
-  dispatch({
-    type: FETCH_PRODUCTS,
-    payload: data,
-  });
-};
+export function fetchProducts(data) {
+  return (dispatch) =>
+    dispatch({
+      type: FETCH_PRODUCTS,
+      payload: data,
+    });
+}
 
-export const filterProducts = (products, size) => (dispatch) => {
-  dispatch({
+export function filterProducts(products, size) {
+  return {
     type: FILTER_PRODUCTS_BY_SIZE,
     payload: {
       size: size,
@@ -24,9 +22,10 @@ export const filterProducts = (products, size) => (dispatch) => {
           ? products
           : products.filter((x) => x.availableSizes.indexOf(size) >= 0),
     },
-  });
-};
-export const sortProducts = (filteredProducts, sort) => (dispatch) => {
+  };
+}
+
+export function sortProducts(filteredProducts, sort) {
   const sortedProducts = filteredProducts.slice();
   if (sort === "latest") {
     sortedProducts.sort((a, b) => (a._id > b._id ? 1 : -1));
@@ -41,12 +40,11 @@ export const sortProducts = (filteredProducts, sort) => (dispatch) => {
         : 1
     );
   }
-
-  dispatch({
+  return {
     type: ORDER_PRODUCTS_BY_PRICE,
     payload: {
       sort: sort,
       items: sortedProducts,
     },
-  });
-};
+  };
+}
