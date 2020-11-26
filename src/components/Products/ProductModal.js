@@ -1,12 +1,15 @@
 import React from "react";
-import formatCurrency from "../util";
+import formatCurrency from "../../util";
+import {
+  Button,
+  ProductModalContainer,
+  CloseModal,
+} from "../../StyledComponents";
 
 function ProductModal({ closeModal, modalProduct, addToCart }) {
   return (
-    <>
-      <button className="close-modal" onClick={closeModal}>
-        x
-      </button>
+    <ProductModalContainer>
+      <CloseModal onClick={closeModal}>x</CloseModal>
 
       <div className="product-details">
         <img src={modalProduct.image} alt={modalProduct.title}></img>
@@ -26,19 +29,19 @@ function ProductModal({ closeModal, modalProduct, addToCart }) {
           </p>
           <div className="product-price">
             <div>{formatCurrency(modalProduct.price)}</div>
-            <button
-              className="button primary"
+            <Button
+              primary
               onClick={() => {
                 addToCart(modalProduct);
                 closeModal();
               }}
             >
               Add To Cart
-            </button>
+            </Button>
           </div>
         </div>
       </div>
-    </>
+    </ProductModalContainer>
   );
 }
 

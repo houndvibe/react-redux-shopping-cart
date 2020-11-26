@@ -1,12 +1,11 @@
 import React from "react";
+import { CloseModal, OrderInfo } from "../../StyledComponents";
 
 function OrderModal({ closeModal, orderList }) {
   return (
-    <>
-      <button className="close-modal" onClick={closeModal}>
-        x
-      </button>
-      <div className="order-info">
+    <OrderInfo>
+      <CloseModal onClick={closeModal}>x</CloseModal>
+      <div>
         <h1>Your order confirmed!</h1>
         <hr />
         <p>{orderList.name}</p>
@@ -19,7 +18,7 @@ function OrderModal({ closeModal, orderList }) {
           ))}
         </p>
       </div>
-    </>
+    </OrderInfo>
   );
 }
 
