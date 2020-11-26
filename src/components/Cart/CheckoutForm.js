@@ -1,9 +1,10 @@
 import React from "react";
+import { Button, Form } from "../../StyledComponents";
 
 function CheckoutForm({ createOrder, handleInput }) {
   return (
-    <form onSubmit={(e) => createOrder(e)}>
-      <ul className="form-container">
+    <Form onSubmit={(e) => createOrder(e)}>
+      <ul>
         <li>
           <label>Email</label>
           <input
@@ -32,12 +33,12 @@ function CheckoutForm({ createOrder, handleInput }) {
           ></input>
         </li>
         <li>
-          <button className="button primary" type="submit">
+          <Button primary type="submit">
             Checkout
-          </button>
+          </Button>
         </li>
       </ul>
-    </form>
+    </Form>
   );
 }
 

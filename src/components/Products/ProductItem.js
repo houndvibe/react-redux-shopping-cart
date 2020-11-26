@@ -1,5 +1,6 @@
 import React from "react";
-import formatCurrency from "../util";
+import formatCurrency from "../../util";
+import { Button } from "../../StyledComponents";
 
 function ProductItem({ product, openModal, addToCart }) {
   return (
@@ -11,9 +12,9 @@ function ProductItem({ product, openModal, addToCart }) {
         </a>
         <div className="product-price">
           <div>{formatCurrency(product.price)}</div>
-          <button onClick={() => addToCart(product)} className="button primary">
+          <Button primary onClick={() => addToCart(product)}>
             Add to cart
-          </button>
+          </Button>
         </div>
       </div>
     </li>

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Fade, Zoom } from "react-reveal";
 import Modal from "react-modal";
 import { connect, useDispatch } from "react-redux";
-import { fetchProducts } from "../store/actions/productActions";
-import { addToCart } from "../store/actions/cartActions";
+import { fetchProducts } from "../../store/actions/productActions";
+import { addToCart } from "../../store/actions/cartActions";
 import ProductItem from "./ProductItem";
 import ProductModal from "./ProductModal";
+import { ProductsContainer } from "../../StyledComponents";
 
 const Products = ({ fetchProducts, addToCart, products }) => {
   const [state, setState] = useState({ modalProduct: null });
@@ -28,7 +29,7 @@ const Products = ({ fetchProducts, addToCart, products }) => {
   };
 
   return (
-    <div>
+    <ProductsContainer>
       <Fade bottom cascade>
         {!products ? (
           <div>Loading...</div>
@@ -57,7 +58,7 @@ const Products = ({ fetchProducts, addToCart, products }) => {
           </Zoom>
         </Modal>
       )}
-    </div>
+    </ProductsContainer>
   );
 };
 

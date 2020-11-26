@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { filterProducts, sortProducts } from "../store/actions/productActions";
+import {
+  filterProducts,
+  sortProducts,
+} from "../../store/actions/productActions";
+import { FilterContainer } from "../../StyledComponents";
 
 const Filter = ({
   size,
@@ -13,7 +17,7 @@ const Filter = ({
   return !filteredProducts ? (
     <div>Loading...</div>
   ) : (
-    <div className="filter">
+    <FilterContainer>
       <div className="filter-result">{filteredProducts.length} Products</div>
       <div className="filter-sort">
         Order{" "}
@@ -41,7 +45,7 @@ const Filter = ({
           <option value="XXL">XXL</option>
         </select>
       </div>
-    </div>
+    </FilterContainer>
   );
 };
 

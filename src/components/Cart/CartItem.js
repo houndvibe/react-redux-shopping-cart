@@ -1,5 +1,6 @@
 import React from "react";
-import formatCurrency from "../util";
+import formatCurrency from "../../util";
+import { Button } from "../../StyledComponents";
 
 function CartItem({ item, removeFromCart }) {
   return (
@@ -17,9 +18,9 @@ function CartItem({ item, removeFromCart }) {
               " (" + formatCurrency(item.count * item.price) + ")"}{" "}
           </div>
 
-          <button className="button" onClick={() => removeFromCart(item)}>
+          <Button className="button" onClick={() => removeFromCart(item)}>
             Remove
-          </button>
+          </Button>
         </div>
       </div>
     </li>

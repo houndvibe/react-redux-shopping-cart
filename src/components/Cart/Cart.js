@@ -3,22 +3,12 @@ import Fade from "react-reveal/Fade";
 import { connect } from "react-redux";
 import { Zoom } from "react-reveal";
 import Modal from "react-modal";
-import formatCurrency from "../util";
-import { removeFromCart } from "../store/actions/cartActions";
+import formatCurrency from "../../util";
+import { removeFromCart } from "../../store/actions/cartActions";
 import CartItem from "./CartItem";
 import CheckoutForm from "./CheckoutForm";
-import OrderModal from "./OrderModal";
-
-const modalStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    minWidth: "700px",
-    transform: "translate(-50%, -50%)",
-  },
-};
+import OrderModal from "../Orders/OrderModal";
+import { Button, CartContainer, modalStyles } from "../../StyledComponents";
 
 const Cart = ({ removeFromCart, cartItems }) => {
   const [state, setState] = useState({
@@ -53,7 +43,7 @@ const Cart = ({ removeFromCart, cartItems }) => {
     .reduce((prev, next) => prev + next, 0);
 
   return (
-    <div>
+    <CartContainer>
       {cartItemsCount === 0 ? (
         <div className="cart cart-header">Cart is empty</div>
       ) : cartItemsCount === 1 ? (
@@ -89,14 +79,14 @@ const Cart = ({ removeFromCart, cartItems }) => {
                     cartItems.reduce((a, c) => a + c.price * c.count, 0)
                   )}
                 </div>
-                <button
+                <Button
+                  primary
                   onClick={() => {
                     setState({ showCheckout: true });
                   }}
-                  className="button primary"
                 >
                   Proceed
-                </button>
+                </Button>
               </div>
             </div>
             {state.showCheckout && (
@@ -125,7 +115,7 @@ const Cart = ({ removeFromCart, cartItems }) => {
           </div>
         )}
       </div>
-    </div>
+    </CartContainer>
   );
 };
 
