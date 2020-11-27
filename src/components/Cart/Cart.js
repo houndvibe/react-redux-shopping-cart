@@ -19,6 +19,7 @@ const Cart = ({ removeFromCart, cartItems }) => {
   });
 
   const [orderList, setOrderList] = useState();
+
   const closeModal = () => {
     setOrderList();
   };
@@ -36,6 +37,20 @@ const Cart = ({ removeFromCart, cartItems }) => {
       cartItems: cartItems,
     };
     setOrderList(order);
+
+    let toLocalStorage = [];
+
+    if (!localStorage.getItem("adminOrders")) {
+      toLocalStorage.push(order);
+    } else {
+      toLocalStorage = JSON.parse(localStorage.getItem("adminOrders"));
+      toLocalStorage.push(order);
+    }
+    localStorage.setItem("adminOrders", JSON.stringify(toLocalStorage));
+
+    setState({
+      showCheckout: false,
+    });
   };
 
   const cartItemsCount = cartItems

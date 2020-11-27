@@ -70,6 +70,31 @@ export const AppContainer = styled.div`
   }
 `;
 
+//AdminScreen.js
+export const AdminContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h2,
+  Button {
+    margin-left: 20px;
+  }
+`;
+//Orders.js
+export const Table = styled.table`
+  border-collapse: collapse;
+  margin: 20px;
+
+  thead {
+    background-color: lightgrey;
+  }
+  td,
+  th {
+    padding: 20px;
+    border: 1px solid black;
+  }
+`;
+
 //HomeScreen.js
 export const Content = styled.div`
   display: flex;
