@@ -1,11 +1,12 @@
 import React from "react";
 import Orders from "../components/Orders/Orders";
+import { AdminContainer } from "../StyledComponents";
 
 const AdminScreen = () => {
   return (
-    <div>
+    <AdminContainer>
       <Orders />
-    </div>
+    </AdminContainer>
   );
 };
 

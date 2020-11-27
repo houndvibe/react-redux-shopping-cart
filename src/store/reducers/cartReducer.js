@@ -6,9 +6,9 @@ export const cartReducer = (
 ) => {
   switch (action.type) {
     case ADD_TO_CART:
-      return { cartItems: action.payload.cartItems };
+      return { ...state, cartItems: action.payload.cartItems };
     case REMOVE_FROM_CART:
-      return { cartItems: action.payload.cartItems };
+      return { ...state, cartItems: action.payload.cartItems };
     default:
       return state;
   }
