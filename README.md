@@ -1,6 +1,6 @@
 # React shopping Cart
 
-Frontend - React/redux/react-router
+Frontend - React/redux/react-router/styled-components
 
 Backend - node.js/express
 
