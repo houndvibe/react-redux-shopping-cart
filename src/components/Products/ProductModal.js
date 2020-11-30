@@ -21,7 +21,7 @@ function ProductModal({ closeModal, modalProduct, addToCart }) {
           <p>
             Available Sizes:{" "}
             {modalProduct.availableSizes.map((x) => (
-              <span>
+              <span key={Math.random()}>
                 {" "}
                 <button className="button">{x}</button>
               </span>

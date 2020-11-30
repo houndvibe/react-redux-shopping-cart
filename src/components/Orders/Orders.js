@@ -21,21 +21,23 @@ export default function Orders() {
           <h2>Orders list (localStorage):</h2>
           <Table>
             <thead>
-              <th>Name</th>
-              <th>E-mail</th>
-              <th>Address</th>
-              <th>Items</th>
-              <th>Total price</th>
+              <tr>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Address</th>
+                <th>Items</th>
+                <th>Total price</th>
+              </tr>
             </thead>
             <tbody>
               {adminOrders.map((order) => (
-                <tr>
+                <tr key={Math.random()}>
                   <td>{order.name}</td>
                   <td>{order.email}</td>
                   <td>{order.address}</td>
                   <td>
                     {order.cartItems.map((item) => (
-                      <div>
+                      <div key={Math.random()}>
                         {item.title} x {item.count}
                       </div>
                     ))}

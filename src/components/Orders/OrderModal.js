@@ -12,11 +12,13 @@ function OrderModal({ closeModal, orderList }) {
         <p>{orderList.email}</p>
         <p>{orderList.address}</p>
         <p>Your order:</p>
-        <p>
+        <div>
           {orderList.cartItems.map((item, index) => (
-            <p>{index + 1 + ". " + item.title + " x" + item.count}</p>
+            <p key={item._id}>
+              {index + 1 + ". " + item.title + " x" + item.count}
+            </p>
           ))}
-        </p>
+        </div>
       </div>
     </OrderInfo>
   );

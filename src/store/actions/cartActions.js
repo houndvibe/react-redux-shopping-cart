@@ -23,7 +23,7 @@ export const addToCart = (product) => (dispatch, getState) => {
 };
 
 export const removeFromCart = (product) => (dispatch, getState) => {
-  const cartItems = [...getState().cart.cartItems].filter(
+  let cartItems = [...getState().cart.cartItems].filter(
     (x) => x._id !== product._id
   );
 
